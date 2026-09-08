@@ -30,7 +30,7 @@ public class HelloController {
         );
     }
 
-    // Individual assignment - Variant 4
+    // Individual assignment - Variant 4: factorialgit add src/main/java/kz/iitu/springlab/web/HelloController.java
     @GetMapping("/factorial")
     public FactorialResult factorial(@RequestParam int n) {
 
