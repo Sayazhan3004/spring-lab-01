@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+app:
+  environment: "development"
+
+  upload:
+    max-file-size: 20
+    allowed-extensions:
+      - jpg
+      - png
+      - pdf
+      - txt
