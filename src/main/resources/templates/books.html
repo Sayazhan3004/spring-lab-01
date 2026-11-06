@@ -1,55 +1,119 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Book Catalog — Sayazhan Tileukozha</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
 </head>
+
 <body>
+
 <main class="container">
+
     <header>
         <h1>Book Catalog</h1>
-        <p>Spring MVC + Thymeleaf | Sayazhan Tileukozha — 2410 IS</p>
+        <p>
+            Spring MVC + Thymeleaf |
+            Sayazhan Tileukozha — 2410 IS
+        </p>
     </header>
 
     <section class="card">
+
         <h2>Add a new book</h2>
+
         <form th:action="@{/books}" method="post">
-            <input type="text" name="title" placeholder="Book title" required>
-            <input type="text" name="author" placeholder="Author name" required>
-            <input type="number" name="year" placeholder="Publication year" required>
+
+            <input type="text"
+                   name="title"
+                   placeholder="Book title"
+                   required>
+
+            <input type="text"
+                   name="author"
+                   placeholder="Author name"
+                   required>
+
+            <input type="number"
+                   name="year"
+                   placeholder="Publication year"
+                   required>
+
             <button type="submit">Add Book</button>
+
         </form>
+
     </section>
 
     <section class="card">
+
         <h2>Available Books</h2>
+
         <table>
+
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Year</th>
-                <th>Action</th>
+
+                <th sec:authorize="hasRole('ADMIN')">
+                    Action
+                </th>
             </tr>
             </thead>
+
             <tbody>
+
             <tr th:each="book : ${books}">
+
                 <td th:text="${book.id}">1</td>
-                <td th:text="${book.title}">Example</td>
-                <td th:text="${book.author}">Author</td>
-                <td th:text="${book.year}">2026</td>
-                <td>
-                    <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post">
-                        <button class="delete" type="submit">Delete</button>
-                    </form>
+
+                <td th:text="${book.title}">
+                    Example
                 </td>
+
+                <td th:text="${book.author}">
+                    Author
+                </td>
+
+                <td th:text="${book.year}">
+                    2026
+                </td>
+
+                <td sec:authorize="hasRole('ADMIN')">
+
+                    <form th:action="@{/books/{id}/delete(id=${book.id})}"
+                          method="post">
+
+                        <button class="delete"
+                                type="submit">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+
             </tr>
+
             </tbody>
+
         </table>
+
     </section>
+
 </main>
+
 </body>
 </html>
